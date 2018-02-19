@@ -1,8 +1,12 @@
-"use strict";
+const fs = require('fs');
 
-// recursively sort an array of numbers via divide and conquer in O(n log n).
+// Recursively sort an array of numbers via divide and conquer
+// Count the number of split inversions by piggybacking on mergesort
 
-const mergeSort = function(array) {
+file
+let totalInversions = 0;
+
+const mergeSort = (array) => {
     const arrayLength = array.length;
     if (arrayLength === 1) return array;
 
@@ -11,14 +15,14 @@ const mergeSort = function(array) {
 
     const sortedLeftArray = mergeSort(leftArray);
     const sortedRightArray = mergeSort(rightArray);
-    const result = mergeSortTwoArrays(sortedLeftArray, sortedRightArray);
+    const result = mergeAndCountSplitInversions(sortedLeftArray, sortedRightArray);
     return result;
 }
 
-const mergeSortTwoArrays = function(left, right) {
-    let result = [];
+const mergeAndCountSplitInversions = (left, right) => {
     let leftIndex = 0;
     let rightIndex = 0;
+    let result = [];
 
     while (leftIndex < left.length || rightIndex < right.length) {
         if (left[leftIndex] === right[rightIndex]) {
@@ -29,12 +33,21 @@ const mergeSortTwoArrays = function(left, right) {
             result.push(left[leftIndex]);
             leftIndex++;
         } 
-        else if (right[rightIndex] < left[leftIndex] || left[leftIndex] === undefined) {
+        else if (right[rightIndex] < left[leftIndex]) {
+            result.push(right[rightIndex]);
+            totalInversions += left.length - leftIndex;
+            rightIndex++;
+        }
+        else if (left[leftIndex] === undefined) {
             result.push(right[rightIndex]);
             rightIndex++;
-        } 
-        else break;
+        }
     }
 
     return result;
 }
+
+const myArray = fs.
+
+mergeSort(myArray);
+console.log(totalInversions);
