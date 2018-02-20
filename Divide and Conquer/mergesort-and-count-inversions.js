@@ -1,9 +1,6 @@
-const fs = require('fs');
-
 // Recursively sort an array of numbers via divide and conquer
 // Count the number of split inversions by piggybacking on mergesort
 
-file
 let totalInversions = 0;
 
 const mergeSort = (array) => {
@@ -46,8 +43,3 @@ const mergeAndCountSplitInversions = (left, right) => {
 
     return result;
 }
-
-const myArray = fs.
-
-mergeSort(myArray);
-console.log(totalInversions);
